@@ -85,8 +85,26 @@ def validation1():
 
 @app.route('/dashboard.html')
 def dashboard():
-    if session['user'] != '' and session['pass'] != '':
-        return render_template('dashboard.html')
+    if session['user']!='' and session['pass']!='':
+        client = razorpay.Client(auth=(env.key, env.keyid))
+        data = client.invoice.fetch_all()
+        d = dict()
+        d['monthly_sales'] = 0
+        d['annual_sales'] = 0
+        d['daily_orders'] = 0
+        d['monthly_orders'] = 0
+        for i in data['items']:
+            num_days = calcDays(i['date'])
+            for j in i['line_items']:
+                if num_days <= 2629743:
+                    d['monthly_sales'] += j['net_amount']*j['quantity']/100
+                if num_days <= 31536000:
+                    d['annual_sales'] += j['net_amount']*j['quantity']/100
+            if num_days <= 2629743:
+                d['monthly_orders'] += 1
+            if num_days <= 86400:
+                d['daily_orders'] += 1
+        return render_template('dashboard.html', data=d)
     else:
         return render_template('404.html'), 404
 
