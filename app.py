@@ -50,9 +50,24 @@ def forgot_password():
     return render_template('forgot-password.html')
 
 
-@app.route('/register.html')
+@app.route('/register.html', methods=['GET', 'POST'])
 def register():
     return render_template('register.html')
+
+
+@app.route('/validation1', methods=['GET', 'POST'])
+def validation1():
+    if request.method == 'POST':
+        username = request.form['email']
+        password = request.form['password']
+        repass= request.form['repeat_password']
+        if password!=repass:
+            return render_template('register.html',err="Invalid Credentials")
+        fname=request.form['first_name']
+        lname=request.form['last_name']
+        city=request.form['city']
+        
+
 
 
 @app.route('/dashboard.html')
