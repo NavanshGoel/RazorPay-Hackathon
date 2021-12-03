@@ -5,9 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Home - Brand</title>
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='bootstrap/css/bootstrap.min.css') }}">
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic') }}">
-
+    <link rel="stylesheet" href="{{ url_for('static',filename='index/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
 </head>
 
 <body>
@@ -15,7 +14,7 @@
         <div class="container"><a class="navbar-brand" href="/">Easy Invoicing &amp; Analytics</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"></button>
             <div class="collapse navbar-collapse" id="navcol-1"><a class="btn btn-primary ms-auto" role="button" href="login.html">Sign In</a></div><a class="btn btn-primary ms-auto" role="button" href="/register.html" style="margin-left: 20px !important;">Sign Up</a>
         </div>
-    </nav> }}
+    </nav>
     <header class="text-center text-white masthead" style="background: url('https://images.unsplash.com/photo-1501523460185-2aa5d2a0f981?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1231&amp;q=80')no-repeat center center;background-size: cover;">
         <div class="overlay"></div>
         <div class="container">
@@ -37,7 +36,7 @@
     <section class="showcase">
         <div class="container-fluid p-0">
             <div class="row g-0" style="margin-top: 20px;">
-                <div class="col-lg-6 text-white order-lg-2 showcase-img" style="background-image: url(&quot;assets/img/razorpay_items.png&quot;);"><span></span></div>
+                <div class="col-lg-6 text-white order-lg-2 showcase-img" style="background-image: url(&quot;static/img/razorpay_items.png&quot;);"><span></span></div>
                 <div class="col-lg-6 my-auto order-lg-1 showcase-text">
                     <h2>Direct Razorpay Product Integration!</h2>
                     <p class="lead mb-0">As a seller you don't need to add products to our site. We will automatically display all your products right here from your Razorpay Items.</p>
@@ -64,25 +63,25 @@
             <h2 class="mb-5">Creators of Easy Invoicing And Analytics</h2>
             <div class="row">
                 <div class="col-lg-4 col-xl-3">
-                    <div class="mx-auto testimonial-item mb-5 mb-lg-0"><img class="rounded-circle img-fluid mb-3" src="assets/img/has.jpg">
+                    <div class="mx-auto testimonial-item mb-5 mb-lg-0"><img class="rounded-circle img-fluid mb-3" src="{{ url_for('static',filename='img/has.jpg') }}">
                         <h5>Harshit Maheshwari</h5>
                         <p class="font-weight-light mb-0">"Always in search of new!"</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-xl-3">
-                    <div class="mx-auto testimonial-item mb-5 mb-lg-0"><img class="rounded-circle img-fluid mb-3" src="assets/img/tej.png">
+                    <div class="mx-auto testimonial-item mb-5 mb-lg-0"><img class="rounded-circle img-fluid mb-3" src="{{ url_for('static',filename='img/tej.png') }}">
                         <h5>Tejaswi Kumar</h5>
                         <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-xl-3">
-                    <div class="mx-auto testimonial-item mb-5 mb-lg-0"><img class="rounded-circle img-fluid mb-3" src="assets/img/ash.jpeg">
+                    <div class="mx-auto testimonial-item mb-5 mb-lg-0"><img class="rounded-circle img-fluid mb-3" src="{{ url_for('static',filename='img/ash.jpeg') }}">
                         <h5>Ashanki Priyadarshi</h5>
                         <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-xl-3">
-                    <div class="mx-auto testimonial-item mb-5 mb-lg-0"><img class="rounded-circle img-fluid mb-3" src="assets/img/nav.jpeg">
+                    <div class="mx-auto testimonial-item mb-5 mb-lg-0"><img class="rounded-circle img-fluid mb-3" src="{{ url_for('static',filename='img/nav.jpeg') }}">
                         <h5>Navansh Goel</h5>
                         <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
                     </div>
@@ -90,7 +89,7 @@
             </div>
         </div>
     </section>
-    <section class="text-center text-white call-to-action" style="background:url(&quot;assets/img/bg-masthead.jpg&quot;) no-repeat center center;background-size:cover;">
+    <section class="text-center text-white call-to-action" style="background:url(&quot;static/img/bg-masthead.jpg&quot;) no-repeat center center;background-size:cover;">
         <div class="overlay"></div>
         <div class="container">
             <div class="row">
@@ -108,26 +107,8 @@
             </div>
         </div>
     </section>
-    <footer class="bg-light footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 text-center text-lg-start my-auto h-100">
-                    <ul class="list-inline mb-2">
-                        <li class="list-inline-item"></li>
-                        <li class="list-inline-item"></li>
-                        <li class="list-inline-item"></li>
-                        <li class="list-inline-item"></li>
-                        <li class="list-inline-item"></li>
-                        <li class="list-inline-item"></li>
-                        <li class="list-inline-item"></li>
-                    </ul>
-                    <p class="text-muted small mb-4 mb-lg-0">Easy Invoicing And Analytics</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <script src="{{ url_for('static',filename='bootstrap/js/bootstrap.min.js') }}"></script>
-
+  
+    <script src="{{ url_for('static',filename='index/bootstrap/js/bootstrap.min.js') }}"></script>
 </body>
 
 </html>

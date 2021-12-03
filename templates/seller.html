@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./seller.css') }}">
+    <script src="{{url_for('static', filename='./seller.js')}}"></script>
+    <title>Seller Page</title>
+</head>
+<body>
+    {% block content %}
+    <h1>Seller Page</h1>
+    <form method="post" action="/cart">
+    Customer Name: <input id="cust_name" type="text" name="cust_name">
+    Customer Phone Number: <input id="cust_phone" type="number" name="cust_phone" required>
+    Customer Email: <input id="cust_email" type="email" name="cust_email">
+    <div>
+        {% for datas in data %}
+        <section class="task-list current">
+              <span>
+                  <div>
+                    <input type="checkbox" value="{{datas['id']}}" name="itemCheck">
+                    <p id="{{datas['id']}}">{{datas['id']}} ----------------- {{datas['name']}}  - INR {{datas['amount']}}</p>
+                    <br>
+                    <p>{{datas['description']}}  --------------
+                      Qty:<input id="qty" type="number" name="qty" value="0">
+                      <br><br>
+                    </p>
+                  </div>
+                </div>
+              </span>
+          </section>
+        {% endfor %}
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+    {%endblock content %}
+</body>
+</html>
