@@ -10,28 +10,43 @@
   <link rel="icon" href="/favicon.ico">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
-  <link rel="stylesheet" href="css/styles.css?v=1.0">
-
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
 </head>
 <body>
     <h1>Cart Page</h1>
     {% block content %}
-    <ul>
+    <ul style="list-style-type: none;">
         <li>Customer Name: {{cust_name}} </li>
         <li>Customer Email: {{cust_email}}</li>
         <li>Customer Phone: {{cust_phone}}</li>
-        {% for i in selected_item %}
-            {% for j in final_amt %}
-            <li>{{i}} - {{j}}</li>
-            {% endfor %}
-        {% endfor %}
-        <!-- {{qty}} -->
             <!-- {{amt}} -->
             <!-- {{final_amt}} -->
-    </ul>
-    {{pname}}
-    <p>Total amount: {{total_amt}}</p>
+            {{qty}}
+        {{product_name}}
+        {{final_amt}}
+        <p>Total amount: {{total_amt}}</p>
+    <div class="item-id">
+      <p>Item ID</p>
+      {% for i in selected_item %}
+        <li>{{i}}</li>
+      {% endfor %}
+    </div>
+    <div class="product-name">
+      {% for i in product_name %}
+        <li>{{i}}</li>
+      {% endfor %}
+    </div>
+    <div class="quantity">
+      {% for i in qty %}
+        <li>{{i}}</li>
+      {% endfor %}
+    </div>
+    <div class="product-amount">
+      {% for i in final_amt %}
+        <li>{{i}}</li>
+      {% endfor %}
+    </div>
+  </ul>
     {%endblock content %}
   <!-- your content here... -->
   <script src="js/scripts.js"></script>

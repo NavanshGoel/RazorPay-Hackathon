@@ -143,18 +143,18 @@
                                 </div>
                                 <div class="card-body">
                                     <p class="text-primary m-0 fw-bold" style="margin-top: 50px !important;">Razorpay API</p>
-                                    <form>
+                                    
                                         <div class="row">
                                             <div class="col">
-                                                <div class="mb-3"><label class="form-label" for="username"><strong>Key ID</strong></label><input class="form-control" type="text" id="username-1" placeholder="rzp_test_*********" name="keyid"></div>
+                                                <div class="mb-3"><label class="form-label" for="username"><strong>Key ID</strong></label><br>{{key}}</div>
                                             </div>
                                         </div>
                                         <div class="mb-3">
                                             <div class="col">
-                                                <div class="mb-3"><label class="form-label" for="email"><strong>Key Private</strong></label><input class="form-control" type="email" id="email-1" placeholder="0rmq8sSoXM6DXt**********" name="privatekey"></div>
+                                                <div class="mb-3"><label class="form-label" for="email"><strong>Key Private</strong></label><br>{{keyid}}</div>
                                             </div>
                                         </div>
-                                    </form>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -199,18 +199,18 @@
                                             <form>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="username"><strong>Username</strong></label><input class="form-control" type="text" id="username" placeholder="Your username" name="username"></div>
+                                                        <div class="mb-3"><label class="form-label" for="username"><strong>Username</strong></label>&nbsp;&nbsp;{{user}}</div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="email"><strong>Email Address</strong></label><input class="form-control" type="email" id="email" placeholder="user@example.com" name="email"></div>
+                                                        <div class="mb-3"><label class="form-label" for="email"><strong>Email Address</strong></label>&nbsp;&nbsp;{{email}}</div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="first_name"><strong>First Name</strong></label><input class="form-control" type="text" id="first_name" placeholder="John" name="first_name"></div>
+                                                        <div class="mb-3"><label class="form-label" for="first_name"><strong>First Name</strong></label>&nbsp;&nbsp;{{fname}}</div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text" id="last_name" placeholder="Doe" name="last_name"></div>
+                                                        <div class="mb-3"><label class="form-label" for="last_name"><strong>Last Name</strong></label>&nbsp;&nbsp;{{lname}}</div>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3"></div>
@@ -223,15 +223,15 @@
                                         </div>
                                         <div class="card-body">
                                             <form>
-                                                <div class="mb-3"><label class="form-label" for="address"><strong>Address</strong></label><input class="form-control" type="text" id="address" placeholder="Sunset Blvd, 38" name="address"></div>
+                                                <div class="mb-3"><label class="form-label" for="address"><strong>Address</strong></label>&nbsp;&nbsp;{{addr}}</div>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="shopname"><strong>Shop Name</strong></label><input class="form-control" type="text" id="city" placeholder="Name of your store " name="storename"></div>
-                                                        <div class="mb-3"><label class="form-label" for="city"><strong>City</strong></label><input class="form-control" type="text" id="city-1" placeholder="Nagpur" name="city"></div>
+                                                        <div class="mb-3"><label class="form-label" for="shopname"><strong>Shop Name</strong></label>&nbsp;&nbsp;{{sname}}</div>
+                                                        <div class="mb-3"><label class="form-label" for="city"><strong>City</strong></label>&nbsp;&nbsp;{{city}}</div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="contactno"><strong>Contact No</strong></label><input class="form-control" type="text" id="country" placeholder="Contact details for your clients" name="contactno"></div>
-                                                        <div class="mb-3"><label class="form-label" for="country"><strong>Country</strong></label><input class="form-control" type="text" id="country-1" placeholder="India" name="country"></div>
+                                                        <div class="mb-3"><label class="form-label" for="contactno"><strong>Contact No</strong></label>&nbsp;&nbsp;{{cno}}</div>
+                                                        <div class="mb-3"><label class="form-label" for="country"><strong>Country</strong></label>&nbsp;&nbsp;{{country}}</div>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3"></div>
@@ -241,10 +241,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card shadow mb-5">
-                        <div class="card-header py-3"><button class="btn btn-primary btn-sm" type="submit">Save All Settings</button></div>
-                        <div class="card-header py-3"></div>
                     </div>
                 </div>
             </div>

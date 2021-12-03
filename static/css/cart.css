@@ -1,0 +1,23 @@
+ul.ba {
+    list-style-type: none;
+}
+
+.item-id {
+    position: absolute;
+    left: 20px;
+}
+
+.product-name {
+    position: absolute;
+    left: 300px;
+}
+
+.product-amount {
+    position: absolute;
+    left: 500px;
+}
+
+.quantity {
+    position: absolute;
+    left: 700px;
+}
