@@ -21,7 +21,9 @@
               <span>
                   <div>
                     <input type="checkbox" value="{{datas['id']}}" name="itemCheck">
-                    <p id="{{datas['id']}}">{{datas['id']}} ----------------- {{datas['name']}}  - INR {{datas['amount']}}</p>
+                    <input id="pname" name="pname" value="{{datas['name']}}" readonly>
+                    <p id="{{datas['id']}}">{{datas['id']}} ----------------- {{datas['name']}}</p>
+                    INR <input id="amt" name="amt" value="{{datas['amount']}}" readonly>
                     <br>
                     <p>{{datas['description']}}  --------------
                       Qty:<input id="qty" type="number" name="qty" value="0">
