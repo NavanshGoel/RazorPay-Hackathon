@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Register - Brand</title>
+    <title>Register - EIA</title>
     <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="static/fonts/fontawesome-all.min.css">
@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="static/fonts/fontawesome5-overrides.min.css">
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-primary" style="overflow: hidden;">
     <div class="container">
         <div class="card shadow-lg o-hidden border-0 my-5" style="color: var(--bs-purple);">
-            <div class="card-body p-0">
+            <div class="card-body p-0" style="height: 870px;">
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-flex">
                         <div class="flex-grow-1 bg-register-image" style="background-image: url(&quot;https://images.unsplash.com/photo-1556155092-490a1ba16284?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1170&amp;q=80&quot;);"></div>
@@ -24,6 +24,7 @@
                         <div class="p-5">
                             <div class="text-center">
                                 <h4 class="text-dark mb-4">Create an Account!</h4>
+                                <h4 style="color:red;">{{err}}</h4>
                             </div>
                             <form class="user" action="/validation1" method="post">
                                 <div class="row mb-3">
@@ -32,14 +33,10 @@
                                 </div>
                                 <div class="mb-3"><input class="form-control form-control-user" type="email" id="exampleInputEmail-1" aria-describedby="emailHelp" placeholder="Email Address" name="email"></div>
                                 <div class="row mb-3">
-                                    <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="password" id="examplePasswordInput" placeholder="Password" name="password"><input class="form-control form-control-user" type="password" id="examplePasswordInput-6" placeholder="City" name="city" style="margin-top: 15px;"></div>
-                                    <div class="col-sm-6"><input class="form-control form-control-user" type="password" id="exampleRepeatPasswordInput" placeholder="Repeat Password" name="password_repeat"><input class="form-control form-control-user" type="password" id="exampleRepeatPasswordInput-1" placeholder="Country" name="country" style="margin-top: 15px;"></div>
-                                </div><input class="form-control form-control-user" type="password" id="examplePasswordInput-3" placeholder="Your Address" name="addr" style="margin-top: 10px;margin-bottom: 20px;"><select class="border rounded-pill form-select" required="" style="padding: 5px 36px 6px 12px;padding-top: 8px;padding-bottom: 8px;margin: 0;margin-bottom: 20px;" name="type">
-                                    <optgroup label="Register as a">
-                                        <option value="13">Seller</option>
-                                        <option value="12" selected="">Buyer</option>
-                                    </optgroup>
-                                </select><input class="form-control form-control-user" type="password" id="examplePasswordInput-1" placeholder="Razorpay Keyid" name="keyid" style="margin-top: 10px;margin-bottom: 20px;"><input class="form-control form-control-user" type="password" id="examplePasswordInput-2" placeholder="Razorpay Private Key" name="pvtkey" style="margin-top: 10px;margin-bottom: 20px;"><input class="form-control form-control-user" type="password" id="examplePasswordInput-4" placeholder="Shop Name" name="sname" style="margin-top: 10px;margin-bottom: 20px;width: 532px;"><button class="btn btn-primary d-block btn-user w-100" type="submit">Register Account</button>
+                                    <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="password" id="examplePasswordInput" placeholder="Password" name="password"><input class="form-control form-control-user" type="text" id="examplePasswordInput-6" placeholder="City" name="city" style="margin-top: 15px;"></div>
+                                    <div class="col-sm-6"><input class="form-control form-control-user" type="password" id="exampleRepeatPasswordInput" placeholder="Repeat Password" name="password_repeat"><input class="form-control form-control-user" type="text" id="exampleRepeatPasswordInput-1" placeholder="Country" name="country" style="margin-top: 15px;"></div>
+                                </div><input class="form-control form-control-user" type="text" id="examplePasswordInput-3" placeholder="Your Address" name="addr" style="margin-top: 10px;margin-bottom: 20px;">
+                                <input class="form-control form-control-user" type="password" id="examplePasswordInput-1" placeholder="Razorpay Keyid" name="keyid" style="margin-top: 10px;margin-bottom: 20px;"><input class="form-control form-control-user" type="password" id="examplePasswordInput-2" placeholder="Razorpay Private Key" name="pvtkey" style="margin-top: 10px;margin-bottom: 20px;"><input class="form-control form-control-user" type="text" id="examplePasswordInput-4" placeholder="Shop Name" name="sname" style="margin-top: 10px;margin-bottom: 20px;width: 532px;"><button class="btn btn-primary d-block btn-user w-100" type="submit">Register Account</button>
                                 <hr><a class="btn btn-primary d-block btn-google btn-user w-100 mb-2" role="button"><i class="fab fa-google"></i>&nbsp; Register with Google</a><a class="btn btn-primary d-block btn-facebook btn-user w-100" role="button"><i class="fab fa-facebook-f"></i>&nbsp; Register with Facebook</a>
                                 <hr>
                             </form>

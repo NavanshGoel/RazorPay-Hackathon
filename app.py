@@ -13,6 +13,7 @@ conn = pyodbc.connect('DRIVER='+env.driver+';SERVER=tcp:'+env.server +
                       ';PORT=1433;DATABASE='+env.database+';UID='+env.username+';PWD=' + env.password)
 cursor = conn.cursor()
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -20,9 +21,12 @@ def index():
 
 @app.route('/logout')
 def logout():
-    session['user']='' 
-    session['pass']=''
+    session['user'] = ''
+    session['pass'] = ''
+    session['key'] = ''
+    session['pvtkey'] = ''
     return redirect('/index.html')
+
 
 @app.route('/login.html')
 def login():
@@ -38,8 +42,8 @@ def validation():
             "SELECT * FROM utable WHERE email = ? AND password = ?", username, password)
         row = cursor.fetchone()
         if row:
-            session['user']=username
-            session['pass']=password
+            session['user'] = username
+            session['pass'] = password
             return redirect('/dashboard.html')
         else:
             return render_template('login.html', err="Invalid Credentials")
@@ -60,19 +64,28 @@ def validation1():
     if request.method == 'POST':
         username = request.form['email']
         password = request.form['password']
-        repass= request.form['repeat_password']
-        if password!=repass:
-            return render_template('register.html',err="Invalid Credentials")
-        fname=request.form['first_name']
-        lname=request.form['last_name']
-        city=request.form['city']
-        
-
+        repass = request.form['password_repeat']
+        if password != repass:
+            return render_template('register.html', err="Invalid Credentials")
+        fname = request.form['first_name']
+        lname = request.form['last_name']
+        city = request.form['city']
+        country = request.form['country']
+        addr = request.form['addr']
+        key = request.form['keyid']
+        pvtkey = request.form['pvtkey']
+        sname = request.form['sname']
+        session['key'] = key
+        session['pvtkey'] = pvtkey
+        cursor.execute("INSERT INTO utable (email, password, fname, lname, city, country, addr, keyid, keypr, sname) VALUES (?,?,?,?,?,?,?,?,?,?)",
+                       username, password, fname, lname, city, country, addr, key, pvtkey, sname)
+        cursor.commit()
+        return redirect('/login.html')
 
 
 @app.route('/dashboard.html')
 def dashboard():
-    if session['user']!='' and session['pass']!='':
+    if session['user'] != '' and session['pass'] != '':
         return render_template('dashboard.html')
     else:
         return render_template('404.html'), 404
@@ -104,51 +117,49 @@ def send_data():
         total_amt = 0
         for i in final_amt:
             total_amt = total_amt + i
-    return render_template('cart.html', cust_name=cust_name, cust_phone=cust_phone, cust_email=cust_email, selected_item=selected_item, final_amt=final_amt, qty=qty, total_amt=total_amt, product_name = product_name)
+    return render_template('cart.html', cust_name=cust_name, cust_phone=cust_phone, cust_email=cust_email, selected_item=selected_item, final_amt=final_amt, qty=qty, total_amt=total_amt, product_name=product_name)
 
 
 @app.route('/profile.html')
 def profile():
-    if session['user']!='' and session['pass']!='':
+    if session['user'] != '' and session['pass'] != '':
         cursor.execute(
             "SELECT * FROM utable WHERE email = ? AND password = ?", session['user'], session['pass'])
         row = cursor.fetchone()
         print(row)
-        return render_template('profile.html',fname=row[0],lname=row[1],email=row[2],user=row[2],addr=row[6],sname=row[7],cno=row[8],city=row[9],country=row[10],key=row[11],keyid=row[12])
+        return render_template('profile.html', fname=row[0], lname=row[1], email=row[2], user=row[2], addr=row[6], sname=row[7], cno=row[8], city=row[9], country=row[10], key=row[11], keyid=row[12])
     else:
         return render_template('404.html'), 404
 
 
-
 @app.route('/topgrossing.html')
 def topgrossing():
-    # Replace with your own key ID and secret
-    client = razorpay.Client(
-        auth=(env.key, env.keyid))
-    js = client.invoice.fetch_all()
-    d = dict()
-    for i in js['items']:
-        for j in i['line_items']:
-            num_days = calcDays(i['date'])
-            if num_days <= 2629743:
-                quant_last_30_days = j['quantity']
-            else:
-                quant_last_30_days = 0
-            if j['name'] not in d:
-                d[j['name']] = [j['description'], j['amount']/100,
-                                j['quantity'], quant_last_30_days, j['net_amount']*j['quantity']/100]
-            else:
-                d[j['name']][2] += j['quantity']
-                d[j['name']][3] += quant_last_30_days
-                d[j['name']][4] += j['net_amount']*j['quantity']/100
-    return render_template('topgrossing.html', d=d)
+    if session['user'] != '' and session['pass'] != '':
+        client = razorpay.Client(
+            auth=(session['key'], session['pvtkey']))
+        js = client.invoice.fetch_all()
+        d = dict()
+        for i in js['items']:
+            for j in i['line_items']:
+                num_days = calcDays(i['date'])
+                if num_days <= 2629743:
+                    quant_last_30_days = j['quantity']
+                else:
+                    quant_last_30_days = 0
+                if j['name'] not in d:
+                    d[j['name']] = [j['description'], j['amount']/100,
+                                    j['quantity'], quant_last_30_days, j['net_amount']*j['quantity']/100]
+                else:
+                    d[j['name']][2] += j['quantity']
+                    d[j['name']][3] += quant_last_30_days
+                    d[j['name']][4] += j['net_amount']*j['quantity']/100
+        return render_template('topgrossing.html', d=d)
 
 
 def calcDays(ts):
     curr = int(time.time())
     g = curr-ts
     return g
-
 
 
 @ app.errorhandler(404)
