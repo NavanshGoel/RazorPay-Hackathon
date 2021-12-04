@@ -27,7 +27,6 @@ We are using Razorpay's API to help Small Businesses Easily create and send invo
 * To help small businesses understand what product is generating the most revenue and vice versa.
 * To help small businesses shift to an online invoicing system for easy Tax Calculation and Inventory.
 * To help small businesses 
-* 
 
 ## Credentials:
 
