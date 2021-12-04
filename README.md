@@ -85,7 +85,7 @@ pass- test123
 ## Or Simply Go to This URL and test the Website Yourself
 
 
-<h1 align=center> Contributors ✨ </h1>
+<h1 align=center> Creators ✨ </h1>
 
 
 <a href="https://github.com/NavanshGoel/RazorPay-Hackathon/graphs/contributors">

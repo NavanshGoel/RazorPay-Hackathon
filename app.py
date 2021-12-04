@@ -109,14 +109,14 @@ def dashboard():
             for j in i['line_items']:
                 if num_days <= 2629743:
                     #updating monthly revenue
-                    d['monthly_sales'] += j['net_amount']*j['quantity']/100
+                    d['monthly_sales'] += j['amount']*j['quantity']/100
                     #updating the pie data
                     if j['name'] not in pie_data:
-                        pie_data[j['name']] = j['net_amount']*j['quantity']/100
+                        pie_data[j['name']] = j['amount']*j['quantity']/100
                     else:
-                        pie_data[j['name']] += j['net_amount']*j['quantity']/100
+                        pie_data[j['name']] += j['amount']*j['quantity']/100
                 if num_days <= 31536000:
-                    d['annual_sales'] += j['net_amount']*j['quantity']/100
+                    d['annual_sales'] += j['amount']*j['quantity']/100
             #updating number of orders daily and monthly
             if num_days <= 2629743:
                 d['monthly_orders'] += 1
@@ -273,11 +273,11 @@ def topgrossing():
                     quant_last_30_days = 0
                 if j['name'] not in d:
                     d[j['name']] = [j['description'], j['amount']/100,
-                                    j['quantity'], quant_last_30_days, j['net_amount']*j['quantity']/100]
+                                    j['quantity'], quant_last_30_days, j['amount']*j['quantity']/100]
                 else:
                     d[j['name']][2] += j['quantity']
                     d[j['name']][3] += quant_last_30_days
-                    d[j['name']][4] += j['net_amount']*j['quantity']/100
+                    d[j['name']][4] += j['amount']*j['quantity']/100
         return render_template('topgrossing.html', d=d)
 
 
