@@ -29,9 +29,45 @@ We are using Razorpay's API to help Small Businesses easily create and send invo
 * To help small businesses go digital.
 
 ## Credentials:
-
+```bash
 user- harshit@gmail.com
 pass- test123
+   ```
+## Getting Started
+
+
+1. Clone the repository to your Local machine.
+
+   ```bash
+   $ git clone https://github.com/NavanshGoel/RazorPay-Hackathon.git
+   ```
+
+2. Install Requirements.
+
+   ```bash
+   $ pip3 install requirements.txt
+   ```
+   
+3. Create a env.py File and Add the following variables - 
+	```bash
+	server = 'Your Azure SQL Server Address'
+	database = 'DB Name'
+	username = 'DB username'
+	password = 'DB Password'
+	driver = '{SQL Server}'
+	key = "Razorpay Key ID"
+	keyid = "Razorpay Private Key Credential"
+	secret='Random Number'
+   ```
+
+4. Start the Flask Server.
+
+   ```bash
+   $ python3 app.py
+   ```
+
+
+## Or Simply Go to This URL and test It Yourself
 
 
 <h1 align=center> Contributors ✨ </h1>
