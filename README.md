@@ -28,7 +28,7 @@ We are using Razorpay's API to help Small Businesses easily create and send invo
 * To help small businesses shift to an online invoicing system for easy tax calculation and inventory.
 * To help small businesses go digital.
 
-## Credentials:
+## Sample Credentials:
 ```bash
 user- harshit@gmail.com
 pass- test123
