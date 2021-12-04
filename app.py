@@ -5,12 +5,12 @@ import requests
 import json
 import env
 import pyodbc
+from werkzeug.exceptions import HTTPException
 
 app = Flask(__name__)
 app.secret_key = env.secret
 
-conn = pyodbc.connect('DRIVER='+env.driver+';SERVER=tcp:'+env.server +
-                      ';PORT=1433;DATABASE='+env.database+';UID='+env.username+';PWD=' + env.password)
+conn = pyodbc.connect('DRIVER='+env.driver+';SERVER=tcp:'+env.server +';PORT=1433;DATABASE='+env.database+';UID='+env.username+';PWD=' + env.password)
 cursor = conn.cursor()
 
 
@@ -44,6 +44,8 @@ def validation():
         if row:
             session['user'] = username
             session['pass'] = password
+            session['key'] = row[10]
+            session['pvtkey'] = row[11]
             return redirect('/dashboard.html')
         else:
             return render_template('login.html', err="Invalid Credentials")
@@ -75,8 +77,6 @@ def validation1():
         key = request.form['keyid']
         pvtkey = request.form['pvtkey']
         sname = request.form['sname']
-        session['key'] = key
-        session['pvtkey'] = pvtkey
         cursor.execute("INSERT INTO utable (email, password, fname, lname, city, country, addr, keyid, keypr, sname) VALUES (?,?,?,?,?,?,?,?,?,?)",
                        username, password, fname, lname, city, country, addr, key, pvtkey, sname)
         cursor.commit()
@@ -145,7 +145,7 @@ def profile():
             "SELECT * FROM utable WHERE email = ? AND password = ?", session['user'], session['pass'])
         row = cursor.fetchone()
         print(row)
-        return render_template('profile.html', fname=row[0], lname=row[1], email=row[2], user=row[2], addr=row[6], sname=row[7], cno=row[8], city=row[9], country=row[10], key=row[11], keyid=row[12])
+        return render_template('profile.html', fname=row[0], lname=row[1], email=row[2], user=row[2], addr=row[5], sname=row[6], cno=row[7], city=row[8], country=row[9], key=row[10], keyid=row[11])
     else:
         return render_template('404.html'), 404
 
@@ -184,6 +184,14 @@ def calcDays(ts):
 def not_found(e):
     return render_template('404.html'), 404
 
+@app.errorhandler(Exception)
+def handle_exception(e):
+    # pass through HTTP errors
+    if isinstance(e, HTTPException):
+        return e
+
+    # now you're handling non-HTTP exceptions only
+    return render_template("login.html", e=e), 500
 
 if __name__ == "__main__":
     app.run(debug=True)

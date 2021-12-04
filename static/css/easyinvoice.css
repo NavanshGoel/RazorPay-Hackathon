@@ -15,10 +15,22 @@ tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-.tab_data {
+.tab_data1,.tab_data2,.tab_data3,.tab_data4 {
   border: none;
   padding: 5px;
+  border-radius: 10px;
+  
 }
+.tab_data4,.tab_data3{text-align: center;}
+
+.tab_data6{text-align: left;}
+
+.cust_form{ padding: 12px 20px;
+  margin: 8px 10px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;}
 
 .buttonop {
   background-color: transparent;

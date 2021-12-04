@@ -90,11 +90,11 @@
                     <h1>Easy Invoicing!</h1>
                     <form method="post" action="/cart.html">
 
-                    Customer Name: <input id="cust_name" type="text" name="cust_name">
-                    Customer Phone Number: <input id="cust_phone" type="number" name="cust_phone" required>
-                    Customer Email: <input id="cust_email" type="email" name="cust_email"> <br>
+                    <input class="cust_form" placeholder="Customer Name" id="cust_name" type="text" name="cust_name">
+                    <input class="cust_form" id="cust_phone" placeholder="Customer Ph No" type="number" name="cust_phone" required>
+                    <input class="cust_form" id="cust_email" placeholder="Customer Email" type="email" name="cust_email"> <br>
                     <div>
-                        <div style="overflow-x:auto;">
+                        <div style="overflow-x:auto;margin-top: -150px;">
                             <table>
                               <tr>
                                 <th>Select</th>
@@ -103,33 +103,21 @@
                                 <th>Amount</th>
                                 <th>Item Id</th>
                                 <th>Description</th>
-                                
                               </tr>
 
                         {% for datas in data %}
                         <section>
                               <span>
                                   <div>
-
-                               
                                       <tr>
-                                        <td><input class="tab_data" type="checkbox" value="{{datas['id']}}" name="itemCheck"></td>
-                                        <td><input class="tab_data" id="pname" name="pname" value="{{datas['name']}}" style="width:100px" readonly></td>
-                                        <td><input class="tab_data"  id="qty" type="number" name="qty" value="0" style="width:40px"></td>
-                                        <td><input class="tab_data" id="amt" name="amt" value="{{datas['amount']}}" size="4" readonly></td>
-                                        <td><p id="{{datas['id']}}">{{datas['id']}}</p></td>
-                                        <td> <p>{{datas['description']}}  </p></td>
+                                        <td><input class="tab_data1" type="checkbox" value="{{datas['id']}}" name="itemCheck"></td>
+                                        <td><input class="tab_data2" id="pname" name="pname" value="{{datas['name']}}" style="width:100px" readonly></td>
+                                        <td><input class="tab_data3"  id="qty" type="number" name="qty" value="0" style="width:40px"></td>
+                                        <td><input class="tab_data4" id="amt" name="amt" value="{{datas['amount']}}" size="4" readonly></td>
+                                        <td><p class="tab_data5" id="{{datas['id']}}">{{datas['id']}}</p></td>
+                                        <td> <p class="tab_data6">{{datas['description']}}  </p></td>
                                         
                                       </tr>
-                                
-                                  
-
-
-                                    
-                                    
-                                    
-
-                                   
                                       <br><br>
                                     </p>
                                   </div>
@@ -138,7 +126,7 @@
                           </section>
                         {% endfor %}
                     </table>
-                </div>
+                </div><br> 
                     <button id="buttonop" class="buttonop" type="submit">Submit</button>
                 </div>
                   </form>
@@ -152,13 +140,13 @@
                         <div class="modal-content">
                             <span class="close">&times;</span>
                             <form action="#" method="post">
-                                <h3>Add a new product</h3>
+                                <h3 style="text-align:center">Add a new product</h3>
                                 <ul style="list-style-type: none;">
-                                    <li>Item Name:<input id="item_name" name="item_name"></li>
+                                    <li><input placeholder="Item Name" class="cust_form" id="item_name" name="item_name"></li>
                                     <br>
-                                    <li>Item Description:<input id="item_desc" name="item_desc"></li>
+                                    <li><input placeholder="Item Description" class="cust_form" id="item_desc" name="item_desc"></li>
                                     <br>
-                                    <li>Item price:<input id="item_price" name="item_price"></li>
+                                    <li><input placeholder="Item Price" class="cust_form" id="item_price" name="item_price"></li>
                                     <br>
                                 </ul>
 
@@ -167,29 +155,11 @@
                         </div>
                     </div>
                     {%endblock content %}
-
-
                 </div>
-
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Easy Invoicing &amp; Analytics 2021</span></div>
+                    <div class="text-center my-auto copyright"><span>Easy Invoicing &amp; Analytics</span></div>
                 </div>
             </footer>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
@@ -200,8 +170,6 @@
     <script src="{{url_for('static', filename='js/seller.js')}}"></script>
     <script src="{{ url_for('static',filename='js/easyinvoice.js') }}"></script>
     
-
-
 </body>
 
 </html>
