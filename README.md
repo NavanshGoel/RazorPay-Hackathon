@@ -65,7 +65,7 @@ pass- test123
 	keypr varchar(100) NOT NULL,
 	)
    ```
-3. Create a env.py File and Add the following variables - 
+3. Create a env.py File and Add the following variables in the root directory - 
 	```bash
 	server = 'your_Azure_SQL_server_address'
 	database = 'your_DB_Name'
@@ -96,6 +96,12 @@ pass- test123
 ## Or Simply Go to This URL and test the Website Yourself
 
    Hosted Website Link: <a href="https://eia-hack.herokuapp.com/">Easy Invoicing and Analytics</a>
+   
+## Demo video link:
+	
+## Write up link:
+   
+   Google Doc link: <a href="https://docs.google.com/document/d/1lcjzhOBkBTaFmQuq-6XeYrHKhyMaaknNUl-uHjjiapg/edit?usp=sharing">Write up</a>
    
 <h1 align=center> Creators ✨ </h1>
 
