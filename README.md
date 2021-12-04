@@ -29,6 +29,10 @@ We are using Razorpay's API to help Small Businesses Easily create and send invo
 * To help small businesses 
 * 
 
+## Credentials:
+
+user- harshit@gmail.com
+pass- test123
 
 
 <h1 align=center> Contributors ✨ </h1>
@@ -41,7 +45,4 @@ We are using Razorpay's API to help Small Businesses Easily create and send invo
 
 
 
-Credentials:
 
-user- harshit@gmail.com
-pass- test123
