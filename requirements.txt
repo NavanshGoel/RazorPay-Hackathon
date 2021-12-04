@@ -1,10 +1,8 @@
 flask
 razorpay
 requests
-json
 pyodbc
 werkzeug
 datetime
 base64
-collections
 gunicorn
