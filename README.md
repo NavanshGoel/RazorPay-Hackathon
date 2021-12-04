@@ -1,5 +1,6 @@
 <h1 align=center> FTX Hackathon</h1>
 
+![carbon (1)](https://raw.githubusercontent.com/NavanshGoel/RazorPay-Hackathon/main/static/img/c8ee0b1482ad4d8caa4db16c82dcc560.png)
 
 
 ## Easy Invoicing And Analytics - If You can Visualise it You can Improve it!
