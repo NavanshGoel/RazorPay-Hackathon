@@ -81,10 +81,26 @@ pass- test123
    $ python3 app.py
    ```
 
+5. Sign Up Process.
+
+   ```
+   - Goto Razorpay Website: [RazorPay Login Page](https://dashboard.razorpay.com/?next=app/dashboard#/access/signin])
+   - Sign Up and create an account in order to generate API keys.
+   - Refer the RazorPay API documentation for generating API Keys
+   - Once the keys are generated, head to our website Signup Page and fill the necessary fields accordingly.
+   ```
+
+6. RazorPay API Documentation
+
+   ```
+   For understanding the API workflow, refer the following link: [RazorPay API Documentation](https://razorpay.com/docs/api/)
+   ```
 
 ## Or Simply Go to This URL and test the Website Yourself
 
-
+ ```
+   Hosted Website Link: [Easy Invoicing and Analytics](https://eia-hack.herokuapp.com/)
+ ```
 <h1 align=center> Creators ✨ </h1>
 
 
