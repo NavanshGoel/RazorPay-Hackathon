@@ -50,14 +50,12 @@ pass- test123
    
 3. Create a env.py File and Add the following variables - 
 	```bash
-	server = 'Your Azure SQL Server Address'
-	database = 'DB Name'
-	username = 'DB username'
-	password = 'DB Password'
+	server = 'your_Azure_SQL_server_address'
+	database = 'your_DB_Name'
+	username = 'your_DB_username'
+	password = 'your_DB_Password'
 	driver = '{SQL Server}'
-	key = "Razorpay Key ID"
-	keyid = "Razorpay Private Key Credential"
-	secret='Random Number'
+	secret='your_random_sectret_key'
    ```
 
 4. Start the Flask Server.
