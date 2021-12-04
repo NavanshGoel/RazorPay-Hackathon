@@ -4,5 +4,4 @@ requests
 pyodbc
 werkzeug
 datetime
-base64
 gunicorn
