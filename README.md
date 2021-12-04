@@ -19,7 +19,7 @@ Theme Name: "Build For Small Businesses: A solution that is built for use by sma
 - [x] Check the top selling products in past 30 days.
 - [x] Check the revenue generated All time and in the past 30 days. 
 - [x] Seller Profile - So that multiple sellers can use our platform with their Razorpay API Credentials
-- [x] All The Goals ->
+
 
 ### Our goals when we started this Project
 
@@ -49,12 +49,27 @@ pass- test123
    ```bash
    $ pip3 install requirements.txt
    ```
-   
+3. Create a Azure SQL DB And run the following command - 
+	```bash
+	create table utable(fname varchar(100) NOT NULL,
+	lname varchar(100) NOT NULL,
+	email varchar(100) NOT NULL,
+	password varchar(100) NOT NULL,
+	uname varchar(100) NOT NULL,
+	addr varchar(100) NOT NULL,
+	sname varchar(100) NOT NULL,
+	cno int NOT NULL,
+	city varchar(100) NOT NULL,
+	country varchar(100) NOT NULL,
+	keyid varchar(100) NOT NULL,
+	keypr varchar(100) NOT NULL,
+	)
+   ```
 3. Create a env.py File and Add the following variables - 
 	```bash
 	server = 'your_Azure_SQL_server_address'
 	database = 'your_DB_Name'
-	username = 'your_DB_username'
+	username = 'your_DB_Username'
 	password = 'your_DB_Password'
 	driver = '{SQL Server}'
 	secret='your_random_sectret_key'
