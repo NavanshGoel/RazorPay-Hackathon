@@ -88,11 +88,11 @@
 
                     {% block content %}
                     <h1>Easy Invoicing!</h1>
-                    <form method="post" action="/cart.html">
+                    <form method="post" action="/invoice">
 
                     <input class="cust_form" placeholder="Customer Name" id="cust_name" type="text" name="cust_name">
                     <input class="cust_form" id="cust_phone" placeholder="Customer Ph No" type="number" name="cust_phone" required>
-                    <input class="cust_form" id="cust_email" placeholder="Customer Email" type="email" name="cust_email"> <br>
+                    <input class="cust_form" id="cust_email" placeholder="Customer Email" type="email" name="cust_email" > <br>
                     <div>
                         <div style="overflow-x:auto;margin-top: 50px;">
                             <table>
@@ -111,9 +111,9 @@
                                       <tr>
                                         <td><input class="tab_data1" type="checkbox" value="{{datas['id']}}" name="itemCheck"></td>
                                         <td><input class="tab_data2" id="pname" name="pname" value="{{datas['name']}}" style="width:120px" readonly></td>
-                                        <td><input class="tab_data3"  id="qty" type="number" name="qty" value="0" style="width:40px"></td>
+                                        <td><input class="tab_data3"  id="qty"  min="0" type="number" name="qty" value="0" style="width:40px"></td>
                                         <td><input class="tab_data4" id="amt" name="amt" value="{{datas['amount']//100}}" size="4" readonly></td>
-                                        <td><p class="tab_data5" id="{{datas['id']}}">{{datas['id']}}</p></td>
+                                        <td><p class="tab_data5" id="{{datas['id']}}" name="itemid">{{datas['id']}}</p></td>
                                         <td> <p class="tab_data6">{{datas['description']}}  </p></td>
                                         
                                       </tr>
@@ -140,7 +140,6 @@
                                     <li><input placeholder="Item Price" class="cust_form" id="item_price" name="item_price"></li>
                                     <br>
                                 </ul>
-
                                 <button id="buttonop" class="buttonop" type="submit">Add Product</button>
                             </form>
                         </div>
