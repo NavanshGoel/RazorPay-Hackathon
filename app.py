@@ -13,16 +13,20 @@ import collections
 app = Flask(__name__)
 app.secret_key = env.secret
 
-conn = pyodbc.connect('DRIVER='+env.driver+';SERVER=tcp:'+env.server +';PORT=1433;DATABASE='+env.database+';UID='+env.username+';PWD=' + env.password)
+conn = pyodbc.connect('DRIVER='+env.driver+';SERVER=tcp:'+env.server +
+                      ';PORT=1433;DATABASE='+env.database+';UID='+env.username+';PWD=' + env.password)
 cursor = conn.cursor()
+
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
+
 @app.route('/index.html')
 def ind():
     return render_template('index.html')
+
 
 @app.route('/logout')
 def logout():
@@ -90,11 +94,19 @@ def validation1():
 
 @app.route('/dashboard.html')
 def dashboard():
-    if session['user']!='' and session['pass']!='':
-        client = razorpay.Client(auth=(session['key'], session['pvtkey']))
+    if session['user'] != '' and session['pass'] != '':
+        url = "https://api.razorpay.com/v1/invoices?count=100"
+        s = session['key']+':'+session['pvtkey']
+        en = s.encode("ascii")
+        f = str(base64.b64encode(en).decode("utf-8"))
+        files = []
+        headers = {
+            'Authorization': 'Basic '+f
+        }
+        response = requests.request("GET", url, headers=headers, files=files)
 
-        #initialization of dictionary items
-        data = client.invoice.all()
+        # initialization of dictionary items
+        data = json.loads(response.text)
         d = dict()
         d['monthly_sales'] = 0
         d['annual_sales'] = 0
@@ -104,26 +116,27 @@ def dashboard():
         pie_data = dict()
         for i in data['items']:
             num_days = calcDays(i['date'])
-            month = int(datetime.datetime.fromtimestamp(int(i['date'])).strftime('%m')) - 1
+            month = int(datetime.datetime.fromtimestamp(
+                int(i['date'])).strftime('%m')) - 1
             chart_data[month] += int(i['amount']/100)
             for j in i['line_items']:
                 if num_days <= 2629743:
-                    #updating monthly revenue
+                    # updating monthly revenue
                     d['monthly_sales'] += j['amount']*j['quantity']/100
-                    #updating the pie data
+                    # updating the pie data
                     if j['name'] not in pie_data:
                         pie_data[j['name']] = j['amount']*j['quantity']/100
                     else:
                         pie_data[j['name']] += j['amount']*j['quantity']/100
                 if num_days <= 31536000:
                     d['annual_sales'] += j['amount']*j['quantity']/100
-            #updating number of orders daily and monthly
+            # updating number of orders daily and monthly
             if num_days <= 2629743:
                 d['monthly_orders'] += 1
             if num_days <= 86400:
                 d['daily_orders'] += 1
         d['chart_data'] = chart_data
-        
+
         final_pie_data = calculate_top_products_monthly(pie_data)
 
         d['pie_data_keys'] = json.dumps(list(final_pie_data.keys()))
@@ -134,61 +147,65 @@ def dashboard():
     else:
         return render_template('404.html'), 404
 
+
 def calculate_top_products_monthly(pie_data):
-    sorted_pie_data = collections.OrderedDict(sorted(pie_data.items(), key=lambda kv: kv[1], reverse=True))
+    sorted_pie_data = collections.OrderedDict(
+        sorted(pie_data.items(), key=lambda kv: kv[1], reverse=True))
     final_pie_data = dict()
     others = 0
     counter = 0
     for i in sorted_pie_data.keys():
-        counter+=1
-        if counter<=5:
+        counter += 1
+        if counter <= 5:
             final_pie_data[i] = int(sorted_pie_data[i])
         else:
             others += int(sorted_pie_data[i])
-        
+
     final_pie_data['Others'] = others
     return final_pie_data
-
 
 
 @app.route("/easyinvoice.html", methods=['GET', 'POST'])
 def get_data():
     url = "https://api.razorpay.com/v1/items?count=100"
-    s=session['key']+':'+session['pvtkey']
+    s = session['key']+':'+session['pvtkey']
     en = s.encode("ascii")
-    f=str(base64.b64encode(en).decode("utf-8"))
-    files=[]
+    f = str(base64.b64encode(en).decode("utf-8"))
+    files = []
     headers = {
         'Authorization': 'Basic '+f
     }
-    response = requests.request("GET", url, headers=headers,files=files)
+    response = requests.request("GET", url, headers=headers, files=files)
     data = json.loads(response.text)
     return render_template('easyinvoice.html', data=data['items'])
 
-@app.route("/add",methods=['GET','POST'])
+
+@app.route("/add", methods=['GET', 'POST'])
 def add():
     if request.method == 'POST':
-        item_name=request.form['item_name']
-        item_desc=request.form['item_desc']
-        item_price=request.form['item_price']*100
+        item_name = request.form['item_name']
+        item_desc = request.form['item_desc']
+        item_price = request.form['item_price']*100
         url = "https://api.razorpay.com/v1/items"
-        s=session['key']+':'+session['pvtkey']
+        s = session['key']+':'+session['pvtkey']
         en = s.encode("ascii")
-        f=str(base64.b64encode(en).decode("utf-8"))
-        files=[]
-        payload={'name': item_name,
-        'description': item_desc,
-        'amount': item_price,
-        'currency': 'INR'}
+        f = str(base64.b64encode(en).decode("utf-8"))
+        files = []
+        payload = {'name': item_name,
+                   'description': item_desc,
+                   'amount': item_price,
+                   'currency': 'INR'}
         headers = {
             'Authorization': 'Basic '+f
         }
 
-        response = requests.request("POST", url, headers=headers, data=payload, files=files)
+        response = requests.request(
+            "POST", url, headers=headers, data=payload, files=files)
         print(response)
     return redirect('easyinvoice.html')
 
-@app.route("/invoice",methods=['GET','POST'])
+
+@app.route("/invoice", methods=['GET', 'POST'])
 def invoice():
     if request.method == 'POST':
         cust_name = request.form.get("cust_name")
@@ -199,28 +216,27 @@ def invoice():
         qty = request.form.getlist('qty')
         amt = request.form.getlist('amt')
         client = razorpay.Client(auth=(session['key'], session['pvtkey']))
-        l=[]
-        fq=[int(i) for i in qty if i!='0']
-        if len(fq)==0:
+        l = []
+        fq = [int(i) for i in qty if i != '0']
+        if len(fq) == 0:
             return redirect('easyinvoice.html')
         DATA = {
-        "type": "invoice",
-        "description": "Invoice for shopping list",
-        "partial_payment": True,
-        "customer": {
-            "name": cust_name,
-            "contact": cust_phone,
-            "email": cust_email
-        },
-        "line_items": [{"item_id": selected_item[i],
-            "quantity": fq[i]} for i in range(len(fq))],
-        "sms_notify": 1,
-        "email_notify": 1,
-        "currency": "INR"
+            "type": "invoice",
+            "description": "Invoice for shopping list",
+            "partial_payment": True,
+            "customer": {
+                "name": cust_name,
+                "contact": cust_phone,
+                "email": cust_email
+            },
+            "line_items": [{"item_id": selected_item[i],
+                            "quantity": fq[i]} for i in range(len(fq))],
+            "sms_notify": 1,
+            "email_notify": 1,
+            "currency": "INR"
         }
         client.invoice.create(data=DATA)
         return redirect('easyinvoice.html')
-
 
 
 @app.route("/cart.html", methods=['GET', 'POST'])
@@ -233,7 +249,7 @@ def send_data():
         product_name = request.form.getlist("pname")
         qty = request.form.getlist('qty')
         amt = request.form.getlist('amt')
-        itemid=request.form.getlist("itemid")
+        itemid = request.form.getlist("itemid")
         final_amt = []
         for i in range(0, len(qty)):
             final_amt.append(int(qty[i]) * int(amt[i]))
@@ -242,7 +258,7 @@ def send_data():
         total_amt = 0
         for i in final_amt:
             total_amt = total_amt + i
-    return render_template('cart.html', cust_name=cust_name, cust_phone=cust_phone, cust_email=cust_email, selected_item=selected_item, final_amt=final_amt, qty=qty, total_amt=total_amt, product_name=product_name,itemid=itemid)
+    return render_template('cart.html', cust_name=cust_name, cust_phone=cust_phone, cust_email=cust_email, selected_item=selected_item, final_amt=final_amt, qty=qty, total_amt=total_amt, product_name=product_name, itemid=itemid)
 
 
 @app.route('/profile.html')
@@ -260,9 +276,18 @@ def profile():
 @app.route('/topgrossing.html')
 def topgrossing():
     if session['user'] != '' and session['pass'] != '':
-        client = razorpay.Client(
-            auth=(session['key'], session['pvtkey']))
-        js = client.invoice.fetch_all()
+        url = "https://api.razorpay.com/v1/invoices?count=100"
+        s = session['key']+':'+session['pvtkey']
+        en = s.encode("ascii")
+        f = str(base64.b64encode(en).decode("utf-8"))
+        files = []
+        headers = {
+            'Authorization': 'Basic '+f
+        }
+        response = requests.request("GET", url, headers=headers, files=files)
+
+        # initialization of dictionary items
+        js = json.loads(response.text)
         d = dict()
         for i in js['items']:
             for j in i['line_items']:
@@ -291,6 +316,7 @@ def calcDays(ts):
 def not_found(e):
     return render_template('404.html'), 404
 
+
 @app.errorhandler(Exception)
 def handle_exception(e):
     # pass through HTTP errors
@@ -299,6 +325,7 @@ def handle_exception(e):
 
     # now you're handling non-HTTP exceptions only
     return render_template("login.html", e=e), 500
+
 
 if __name__ == "__main__":
     app.run(debug=True)
