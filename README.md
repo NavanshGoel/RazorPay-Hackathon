@@ -98,8 +98,8 @@ pass- test123
 
 ## Or Simply Go to This URL and test the Website Yourself
 
- ```bash
-   Hosted Website Link: ![Easy Invoicing and Analytics](https://eia-hack.herokuapp.com/)
+ ```
+   Hosted Website Link: <a href="https://eia-hack.herokuapp.com/">Easy Invoicing and Analytics</a>
  ```
 <h1 align=center> Creators ✨ </h1>
 
