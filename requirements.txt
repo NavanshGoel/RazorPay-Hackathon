@@ -1,6 +1,5 @@
 flask
 razorpay
-time
 requests
 json
 pyodbc
