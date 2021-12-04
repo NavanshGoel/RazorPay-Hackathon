@@ -10,6 +10,7 @@
 <h1 align=center> The Chosen <strike>One</strike> Theme </h1>
 
 We are using Razorpay's API to help Small Businesses easily create and send invoices and at the same time visualize the data from those invoices.
+Theme Name: "Build For Small Businesses: A solution that is built for use by small businesses and solves a real problem with a valid use case." (Theme 2)
 
 ## Features 👣
 
