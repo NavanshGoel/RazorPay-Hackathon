@@ -72,7 +72,7 @@ pass- test123
 	username = 'your_DB_Username'
 	password = 'your_DB_Password'
 	driver = '{SQL Server}'
-	secret='your_random_sectret_key'
+	secret='your_random_secret_key'
    ```
 
 4. Start the Flask Server.
