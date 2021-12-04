@@ -1,14 +1,8 @@
 <h1 align=center> FTX Hackathon</h1>
 
-**Do you know anything that can help all to easy our tough life than tell that secret to us and help us to become lazy like Panda**
-
-
 
 
 ## Easy Invoicing And Analytics - If You can Visualise it You can Improve it!
-
-
-
 
 
 
