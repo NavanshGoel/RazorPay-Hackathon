@@ -6,6 +6,7 @@ import json
 import env
 import pyodbc
 from werkzeug.exceptions import HTTPException
+import datetime
 
 app = Flask(__name__)
 app.secret_key = env.secret
@@ -13,11 +14,13 @@ app.secret_key = env.secret
 conn = pyodbc.connect('DRIVER='+env.driver+';SERVER=tcp:'+env.server +';PORT=1433;DATABASE='+env.database+';UID='+env.username+';PWD=' + env.password)
 cursor = conn.cursor()
 
-
 @app.route('/')
 def index():
     return render_template('index.html')
 
+@app.route('/index.html')
+def ind():
+    return render_template('index.html')
 
 @app.route('/logout')
 def logout():
@@ -93,8 +96,11 @@ def dashboard():
         d['annual_sales'] = 0
         d['daily_orders'] = 0
         d['monthly_orders'] = 0
+        chart_data = [0]*12
         for i in data['items']:
             num_days = calcDays(i['date'])
+            month = int(datetime.datetime.fromtimestamp(int(i['date'])).strftime('%m')) - 1
+            chart_data[month] += int(i['amount']/100)
             for j in i['line_items']:
                 if num_days <= 2629743:
                     d['monthly_sales'] += j['net_amount']*j['quantity']/100
@@ -104,6 +110,7 @@ def dashboard():
                 d['monthly_orders'] += 1
             if num_days <= 86400:
                 d['daily_orders'] += 1
+        d['chart_data'] = chart_data
         return render_template('dashboard.html', data=d)
     else:
         return render_template('404.html'), 404
@@ -111,11 +118,18 @@ def dashboard():
 
 @app.route("/easyinvoice.html", methods=['GET', 'POST'])
 def get_data():
-    req = requests.get(
-        'https://raw.githubusercontent.com/ashank2603/RazorPay-Hackathon/main/items.json')
-    data = json.loads(req.content)
+    url = "https://api.razorpay.com/v1/items?count=100"
+    files=[]
+    headers = {
+        'Authorization': 'Basic cnpwX3Rlc3RfcW55WVp4azhHSm5zSjc6MHJtcThzU29YTTZEWHRRSHJFR2xwUndK'
+    }
+    response = requests.request("GET", url, headers=headers,files=files)
+    data = json.loads(response.text)
     return render_template('easyinvoice.html', data=data['items'])
 
+@app.route("/add",methods=['GET','POST'])
+def add():
+    pass
 
 @app.route("/cart.html", methods=['GET', 'POST'])
 def send_data():
@@ -184,14 +198,14 @@ def calcDays(ts):
 def not_found(e):
     return render_template('404.html'), 404
 
-@app.errorhandler(Exception)
-def handle_exception(e):
-    # pass through HTTP errors
-    if isinstance(e, HTTPException):
-        return e
+# @app.errorhandler(Exception)
+# def handle_exception(e):
+#     # pass through HTTP errors
+#     if isinstance(e, HTTPException):
+#         return e
 
-    # now you're handling non-HTTP exceptions only
-    return render_template("login.html", e=e), 500
+#     # now you're handling non-HTTP exceptions only
+#     return render_template("login.html", e=e), 500
 
 if __name__ == "__main__":
     app.run(debug=True)

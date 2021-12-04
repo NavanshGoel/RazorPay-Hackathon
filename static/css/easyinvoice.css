@@ -19,8 +19,9 @@ tr:nth-child(even) {
   border: none;
   padding: 5px;
   border-radius: 10px;
-  
+  background: none;
 }
+
 .tab_data4,.tab_data3{text-align: center;}
 
 .tab_data6{text-align: left;}
